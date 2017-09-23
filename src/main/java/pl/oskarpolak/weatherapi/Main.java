@@ -5,6 +5,7 @@ import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.stage.Stage;
+import pl.oskarpolak.weatherapi.models.Utils;
 
 public class Main extends Application {
 
@@ -14,11 +15,12 @@ public class Main extends Application {
         primaryStage.setTitle("Hello World");
         primaryStage.setScene(new Scene(root, 600, 400));
         primaryStage.show();
-
+        System.out.println(Utils.makeHttpRequest("http://oskarpolak.pl"));
     }
 
 
     public static void main(String[] args) {
         launch(args);
+
     }
 }
