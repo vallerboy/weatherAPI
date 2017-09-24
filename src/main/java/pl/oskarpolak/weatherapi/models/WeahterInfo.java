@@ -4,6 +4,7 @@ public class WeahterInfo {
     private double temp;
     private int pressure;
 
+
     public WeahterInfo(double temp, int pressure) {
         this.temp = temp;
         this.pressure = pressure;

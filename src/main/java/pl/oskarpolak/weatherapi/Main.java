@@ -5,9 +5,12 @@ import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.stage.Stage;
+import pl.oskarpolak.weatherapi.models.IWeatherObserver;
 import pl.oskarpolak.weatherapi.models.Utils;
+import pl.oskarpolak.weatherapi.models.WeahterInfo;
+import pl.oskarpolak.weatherapi.models.services.WeatherService;
 
-public class Main extends Application {
+public class Main extends Application{
 
     @Override
     public void start(Stage primaryStage) throws Exception{
@@ -23,4 +26,5 @@ public class Main extends Application {
         launch(args);
 
     }
+
 }

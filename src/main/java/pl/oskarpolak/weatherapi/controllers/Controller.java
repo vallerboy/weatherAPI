@@ -1,11 +1,14 @@
 package pl.oskarpolak.weatherapi.controllers;
 
+import javafx.event.ActionEvent;
+import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
 import javafx.scene.input.KeyCode;
+import javafx.scene.input.MouseEvent;
 import pl.oskarpolak.weatherapi.models.IWeatherObserver;
 import pl.oskarpolak.weatherapi.models.WeahterInfo;
 import pl.oskarpolak.weatherapi.models.services.WeatherService;
