@@ -6,6 +6,7 @@ import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
+import javafx.scene.control.ProgressIndicator;
 import javafx.scene.control.TextField;
 import javafx.scene.input.KeyCode;
 import javafx.scene.input.MouseEvent;
@@ -29,13 +30,23 @@ public class Controller implements Initializable, IWeatherObserver{
     @FXML
     Label textWeather;
 
+    @FXML
+    ProgressIndicator progressIndi;
+
 
     public void initialize(URL location, ResourceBundle resources) {
+        progressIndi.setVisible(false);
+        textWeather.setVisible(false);
+
+
         weatherService.registerObserver(this);
 
 
        buttonSend.setOnMouseClicked(e -> {
            if(!textCity.getText().isEmpty()) {
+               progressIndi.setVisible(true);
+               textWeather.setVisible(false);
+
                weatherService.makeRequest(textCity.getText());
                textCity.clear();
            }
@@ -43,6 +54,9 @@ public class Controller implements Initializable, IWeatherObserver{
 
        textCity.setOnKeyPressed(e -> {
            if(e.getCode() == KeyCode.ENTER){
+               progressIndi.setVisible(true);
+               textWeather.setVisible(false);
+
                weatherService.makeRequest(textCity.getText());
                textCity.clear();
            }
@@ -52,5 +66,7 @@ public class Controller implements Initializable, IWeatherObserver{
     @Override
     public void onWeatherUpdate(WeahterInfo info) {
         textWeather.setText("Temp: " + info.getTemp() + " | Cisnienie: " + info.getPressure());
+        progressIndi.setVisible(false);
+        textWeather.setVisible(true);
     }
 }
