@@ -57,7 +57,7 @@ public class WeatherDaoImpl implements WeatherDao {
     public List<String> getCities() {
         List<String> cityNames = new ArrayList<>();
         try(PreparedStatement preparedStatement = connector.getConnection().prepareStatement(
-                "SELECT cityname FROM weather"
+                "SELECT DISTINCT cityname FROM weather"
         )) {
 
             ResultSet set = preparedStatement.executeQuery();
