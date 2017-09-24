@@ -3,17 +3,22 @@ package pl.oskarpolak.weatherapi.controllers;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
+import javafx.scene.Parent;
+import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.ProgressIndicator;
 import javafx.scene.control.TextField;
 import javafx.scene.input.KeyCode;
 import javafx.scene.input.MouseEvent;
+import javafx.stage.Stage;
 import pl.oskarpolak.weatherapi.models.IWeatherObserver;
 import pl.oskarpolak.weatherapi.models.WeahterInfo;
 import pl.oskarpolak.weatherapi.models.services.WeatherService;
 
+import java.io.IOException;
 import java.net.URL;
 import java.util.ResourceBundle;
 
@@ -33,6 +38,8 @@ public class Controller implements Initializable, IWeatherObserver{
     @FXML
     ProgressIndicator progressIndi;
 
+    @FXML
+    Button buttonCharts;
 
     public void initialize(URL location, ResourceBundle resources) {
         progressIndi.setVisible(false);
@@ -61,6 +68,21 @@ public class Controller implements Initializable, IWeatherObserver{
                textCity.clear();
            }
        });
+
+
+       buttonCharts.setOnMouseClicked(e -> goToCharts());
+    }
+
+    private void goToCharts() {
+        Stage stage = (Stage) buttonCharts.getScene().getWindow();
+        try {
+            Parent root = FXMLLoader.load(getClass().getClassLoader().getResource("chartView.fxml"));
+            stage.setScene(new Scene(root, 600,400));
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+
+
     }
 
     @Override
