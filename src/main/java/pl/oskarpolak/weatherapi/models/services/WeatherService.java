@@ -29,13 +29,13 @@ public class WeatherService {
     }
 
     public void makeRequest(String city){
-        Runnable runnable = () -> readJsonData(Utils.makeHttpRequest(Config.APP_BASE_URL + city + "&appid=" + Config.APP_ID));
+        Runnable runnable = () -> readJsonData(Utils.makeHttpRequest(Config.APP_BASE_URL + city + "&appid=" + Config.APP_ID), city);
         executorService.execute(runnable);
     }
 
 
 
-    private void readJsonData(String json){
+    private void readJsonData(String json, String cityname){
         JSONObject root = new JSONObject(json);
         JSONObject main = root.getJSONObject("main");
 
@@ -44,7 +44,7 @@ public class WeatherService {
         double temp = main.getDouble("temp");
 
         observer.forEach(s -> {
-            Platform.runLater(() -> s.onWeatherUpdate(new WeahterInfo(temp, pressure)));
+            Platform.runLater(() -> s.onWeatherUpdate(new WeahterInfo(temp, pressure,cityname)));
         });
     }
 

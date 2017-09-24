@@ -16,6 +16,9 @@ import javafx.scene.input.MouseEvent;
 import javafx.stage.Stage;
 import pl.oskarpolak.weatherapi.models.IWeatherObserver;
 import pl.oskarpolak.weatherapi.models.WeahterInfo;
+import pl.oskarpolak.weatherapi.models.WeatherModel;
+import pl.oskarpolak.weatherapi.models.dao.WeatherDao;
+import pl.oskarpolak.weatherapi.models.dao.impl.WeatherDaoImpl;
 import pl.oskarpolak.weatherapi.models.services.WeatherService;
 
 import java.io.IOException;
@@ -40,6 +43,8 @@ public class Controller implements Initializable, IWeatherObserver{
 
     @FXML
     Button buttonCharts;
+
+    private WeatherDao weatherDao = new WeatherDaoImpl();
 
     public void initialize(URL location, ResourceBundle resources) {
         progressIndi.setVisible(false);
@@ -90,5 +95,7 @@ public class Controller implements Initializable, IWeatherObserver{
         textWeather.setText("Temp: " + info.getTemp() + " | Cisnienie: " + info.getPressure());
         progressIndi.setVisible(false);
         textWeather.setVisible(true);
+
+        weatherDao.addWeather(new WeatherModel(info));
     }
 }
